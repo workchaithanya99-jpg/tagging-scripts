@@ -1,0 +1,12 @@
+for a in (here add new aws accounts by parllel so that it works ); do
+  grep -q "^\[profile acct-$a\]" ~/.aws/config 2>/dev/null && { echo "skip $a (exists)"; continue; }
+cat >> ~/.aws/config <<EOF
+[profile acct-$a]
+role_arn = arn:aws:iam::$a:role/TaggingAutomationRole
+credential_source = Ec2InstanceMetadata
+region = us-east-2
+
+EOF
+  echo "added $a"
+done
+grep -c "^\[profile acct-" ~/.aws/config
