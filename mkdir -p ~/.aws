@@ -1,4 +1,4 @@
-for a in (here add new aws accounts by parllel so that it works ); do
+for a in (here add new aws accounts by parllel so that it works if u have 20 accounts add her by parllel with no commos ); do
   grep -q "^\[profile acct-$a\]" ~/.aws/config 2>/dev/null && { echo "skip $a (exists)"; continue; }
 cat >> ~/.aws/config <<EOF
 [profile acct-$a]
